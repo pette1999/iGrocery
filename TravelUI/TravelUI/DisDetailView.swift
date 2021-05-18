@@ -10,23 +10,50 @@ import SwiftUI
 struct DisDetailView: View {
     
     @Binding var selectedDiscount : DisModel!
-    @Binding var show: Bool
+    @Binding var disShow: Bool
     var animation : Namespace.ID
     
     
-    var body: some View {
+    var body: some View{
         
         VStack{
-            HStack{
-                Button(action: {}) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(Color.white)
-                        .clipShape(Circle())
+            
+            VStack{
+                
+                ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
                     
+                    Image(selectedDiscount.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 330)
+                        .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
+                        .matchedGeometryEffect(id: selectedDiscount.image, in: animation)
+                    
+                    HStack{
+                        
+                        Button(action: {
+                            
+                            withAnimation(.spring()){disShow.toggle()}
+                            
+                        }) {
+                            
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(Color.white)
+                                .clipShape(Circle())
+                        }
+                        
+                        Spacer()
+                        
+        
+                    }
+                    .padding()
+                    // since all edges are ignored....
+                    .padding(.top,UIApplication.shared.windows.first?.safeAreaInsets.top)
                 }
-                Spacer()
+                
+                // Details View...
                 
                 HStack(alignment: .top){
                     
@@ -59,12 +86,12 @@ struct DisDetailView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     
-                    BottomView()
+                    BottomView(selectedDiscount: $selectedDiscount)
                 }
             }
             else{
                 
-                BottomView()
+                BottomView(selectedDiscount: $selectedDiscount)
             }
             
             Spacer(minLength: 0)

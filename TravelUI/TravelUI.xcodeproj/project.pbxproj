@@ -14,8 +14,16 @@
 		AD11F7ED24DD898C00DD4EBC /* TravelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11F7EC24DD898C00DD4EBC /* TravelUITests.swift */; };
 		AD11F7F824DD898C00DD4EBC /* TravelUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11F7F724DD898C00DD4EBC /* TravelUIUITests.swift */; };
 		BB74F539264E388200C39BA4 /* DiscountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74F538264E388200C39BA4 /* DiscountView.swift */; };
-		BB74F53E264E403E00C39BA4 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74F53D264E403E00C39BA4 /* SwiftUIView.swift */; };
+		BB74F53E264E403E00C39BA4 /* DisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74F53D264E403E00C39BA4 /* DisModel.swift */; };
 		BB74F543264E4B5E00C39BA4 /* DisDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74F542264E4B5E00C39BA4 /* DisDetailView.swift */; };
+		D08E706F264F68750057D35F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E706E264F68750057D35F /* Item.swift */; };
+		D08E7074264F6CF60057D35F /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E7073264F6CF60057D35F /* CartViewModel.swift */; };
+		D08E7079264F6D170057D35F /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E7078264F6D170057D35F /* CartView.swift */; };
+		D08E707E264F6D1D0057D35F /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E707D264F6D1D0057D35F /* ItemView.swift */; };
+		D08E70872650D0970057D35F /* CheckOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E70862650D0970057D35F /* CheckOutView.swift */; };
+		D08E708F26525FB10057D35F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E708E26525FB10057D35F /* CustomTextField.swift */; };
+		D08E70B32653349E0057D35F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E70B22653349E0057D35F /* Card.swift */; };
+		D08E70BB265334C70057D35F /* CardComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E70BA265334C70057D35F /* CardComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +57,16 @@
 		AD11F7F724DD898C00DD4EBC /* TravelUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelUIUITests.swift; sourceTree = "<group>"; };
 		AD11F7F924DD898C00DD4EBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB74F538264E388200C39BA4 /* DiscountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountView.swift; sourceTree = "<group>"; };
-		BB74F53D264E403E00C39BA4 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		BB74F53D264E403E00C39BA4 /* DisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisModel.swift; sourceTree = "<group>"; };
 		BB74F542264E4B5E00C39BA4 /* DisDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisDetailView.swift; sourceTree = "<group>"; };
+		D08E706E264F68750057D35F /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		D08E7073264F6CF60057D35F /* CartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		D08E7078264F6D170057D35F /* CartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		D08E707D264F6D1D0057D35F /* ItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		D08E70862650D0970057D35F /* CheckOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutView.swift; sourceTree = "<group>"; };
+		D08E708E26525FB10057D35F /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		D08E70B22653349E0057D35F /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		D08E70BA265334C70057D35F /* CardComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardComponent.swift; path = "../../../../Downloads/Card Animation/Shared/View/CardComponent.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +121,15 @@
 				AD11F7DC24DD898A00DD4EBC /* ContentView.swift */,
 				BB74F542264E4B5E00C39BA4 /* DisDetailView.swift */,
 				BB74F538264E388200C39BA4 /* DiscountView.swift */,
-				BB74F53D264E403E00C39BA4 /* SwiftUIView.swift */,
+				D08E70862650D0970057D35F /* CheckOutView.swift */,
+				BB74F53D264E403E00C39BA4 /* DisModel.swift */,
+				D08E706E264F68750057D35F /* Item.swift */,
+				D08E7073264F6CF60057D35F /* CartViewModel.swift */,
+				D08E7078264F6D170057D35F /* CartView.swift */,
+				D08E707D264F6D1D0057D35F /* ItemView.swift */,
+				D08E708E26525FB10057D35F /* CustomTextField.swift */,
+				D08E70B22653349E0057D35F /* Card.swift */,
+				D08E70BA265334C70057D35F /* CardComponent.swift */,
 				AD11F7DE24DD898C00DD4EBC /* Assets.xcassets */,
 				AD11F7E324DD898C00DD4EBC /* Info.plist */,
 				AD11F7E024DD898C00DD4EBC /* Preview Content */,
@@ -269,9 +293,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD11F7DD24DD898A00DD4EBC /* ContentView.swift in Sources */,
+				D08E708F26525FB10057D35F /* CustomTextField.swift in Sources */,
 				AD11F7DB24DD898A00DD4EBC /* TravelUIApp.swift in Sources */,
-				BB74F53E264E403E00C39BA4 /* SwiftUIView.swift in Sources */,
+				D08E7074264F6CF60057D35F /* CartViewModel.swift in Sources */,
+				D08E70B32653349E0057D35F /* Card.swift in Sources */,
+				BB74F53E264E403E00C39BA4 /* DisModel.swift in Sources */,
+				D08E70BB265334C70057D35F /* CardComponent.swift in Sources */,
+				D08E707E264F6D1D0057D35F /* ItemView.swift in Sources */,
 				BB74F543264E4B5E00C39BA4 /* DisDetailView.swift in Sources */,
+				D08E70872650D0970057D35F /* CheckOutView.swift in Sources */,
+				D08E706F264F68750057D35F /* Item.swift in Sources */,
+				D08E7079264F6D170057D35F /* CartView.swift in Sources */,
 				BB74F539264E388200C39BA4 /* DiscountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

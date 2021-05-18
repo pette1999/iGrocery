@@ -12,6 +12,7 @@ struct Home : View {
     
     var animation : Namespace.ID
     @Binding var show : Bool
+    @Binding var disShow : Bool
     @Binding var selected : Model
     @Binding var selectedDiscount : DisModel!
     
@@ -60,17 +61,13 @@ struct Home : View {
                                     .onTapGesture{
                                         withAnimation(.spring()){
                                             selectedDiscount = discount
-                                            show.toggle()
+                                            disShow.toggle()
                                         }
                                     }
                                 
                             }
                         
                             }
-
-                        if selectedDiscount != nil && show{
-                            DisDetailView(selectedDiscount: $selectedDiscount, show: $show, animation: animation)
-                        }
                         }
                         .padding()
                     }
@@ -136,31 +133,12 @@ struct Home : View {
 
 struct Cart : View {
     
-    var body: some View{
-
-        VStack{
-            
-            Spacer()
-            
-            Text("Cart")
-            
-            Spacer()
-        }
-    }
-}
-
-struct Account : View {
+    var animation : Namespace.ID
+    @Binding var checkShow : Bool
     
     var body: some View{
 
-        VStack{
-            
-            Spacer()
-            
-            Text("Account")
-            
-            Spacer()
-        }
+        CartView(checkShow: checkShow, animation: animation)
     }
 }
 
@@ -171,6 +149,8 @@ struct MainView : View {
     @State var tab = "Home"
     @Namespace var animation
     @State var show = false
+    @State var disShow = false
+    @State var checkShow = false
     @State var selected : Model = data[0]
     @State var selectedDiscount : DisModel!
     
@@ -184,13 +164,14 @@ struct MainView : View {
                 
                 switch(tab){
                 
-                case "Home": Home(animation: animation, show: $show, selected: $selected, selectedDiscount: $selectedDiscount)
-                case "Cart": Cart()
-                default: Account()
+                case "Home": Home(animation: animation, show: $show, disShow: $disShow, selected: $selected, selectedDiscount: $selectedDiscount)
+                case "Cart": Cart(animation: animation, checkShow: $checkShow)
+                default: Home(animation: animation, show: $show, disShow: $disShow, selected: $selected, selectedDiscount: $selectedDiscount)
                 
                 }
                 
                 //Spacer()
+            
                 
                 HStack(spacing: 0){
                     
@@ -199,15 +180,11 @@ struct MainView : View {
                     Spacer(minLength: 0)
                     
                     tabButton(title: "Cart", tab: $tab)
-                    
-                    Spacer(minLength: 0)
-                    
-                    tabButton(title: "Account", tab: $tab)
                 }
                 .padding(.top)
                 // for smaller size iPhones....
-                .padding(.bottom,UIApplication.shared.windows.first!.safeAreaInsets.bottom == 0 ? 15 : UIApplication.shared.windows.first!.safeAreaInsets.bottom)
-                .padding(.horizontal,35)
+                .padding(.bottom,UIApplication.shared.windows.first!.safeAreaInsets.bottom == 0 ? 5 : UIApplication.shared.windows.first!.safeAreaInsets.bottom)
+                .padding(.horizontal,100)
                 .background(Color.white)
                 .clipShape(RoundedShape(corners: [.topLeft,.topRight]))
 
@@ -219,9 +196,11 @@ struct MainView : View {
                 
                 Detail(selected: $selected, show: $show, animation: animation)
             }
+            if selectedDiscount != nil && disShow{
+                DisDetailView(selectedDiscount: $selectedDiscount, disShow: $disShow, animation: animation)
+            }
         }
-        .edgesIgnoringSafeArea(.all)
-        .background(Color("bg").edgesIgnoringSafeArea(.all))
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -305,12 +284,12 @@ struct Detail : View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     
-                    BottomView()
+                    BottomViewBig(selected: $selected)
                 }
             }
             else{
                 
-                BottomView()
+                BottomViewBig(selected: $selected)
             }
             
             Spacer(minLength: 0)
@@ -322,6 +301,7 @@ struct Detail : View {
 struct BottomView : View {
     
     @State var index = 1
+    @Binding var selectedDiscount : DisModel!
     
     var body: some View{
         
@@ -331,29 +311,54 @@ struct BottomView : View {
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(Color("txt"))
-            
-           // Text("Member Of Your Group")
-           //     .font(.caption)
-            
-            HStack(spacing: 15){
                 
-                
-                ForEach(1...6,id: \.self){i in
+            HStack(spacing: 15) {
+                Button(action: {
+                    if selectedDiscount.quantity > 1{selectedDiscount.quantity -= 1}
+                }) {
                     
-                    Button(action: {index = i}) {
-                        
-                        Text("\(i)")
-                            .fontWeight(.bold)
-                            .foregroundColor(index == i ? .white : .gray)
-                            .padding(.vertical,10)
-                            .padding(.horizontal)
-                            .background(Color("Color").opacity(index == i ? 1 : 0.07))
-                            .cornerRadius(4)
-                    }
+                    Image(systemName: "minus")
+                        .font(.system(size: 16, weight: .heavy))
+                        .foregroundColor(.black)
                 }
                 
-                Spacer(minLength: 0)
+                Text("\(selectedDiscount.quantity)")
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .padding(.vertical,5)
+                    .padding(.horizontal,10)
+                    .background(Color.black.opacity(0.06))
+                
+                Button(action: {selectedDiscount.quantity += 1}) {
+                    
+                    Image(systemName: "plus")
+                        .font(.system(size: 16, weight: .heavy))
+                        .foregroundColor(.black)
+                }
             }
+            
+//            Text("Member Of Your Group")
+//                .font(.caption)
+            
+//            HStack(spacing: 15){
+//
+//
+//                ForEach(1...6,id: \.self){i in
+//
+//                    Button(action: {index = i}) {
+//
+//                        Text("\(i)")
+//                            .fontWeight(.bold)
+//                            .foregroundColor(index == i ? .white : .gray)
+//                            .padding(.vertical,10)
+//                            .padding(.horizontal)
+//                            .background(Color("Color").opacity(index == i ? 1 : 0.07))
+//                            .cornerRadius(4)
+//                    }
+//                }
+//
+//                Spacer(minLength: 0)
+//            }
             .padding(.top)
             
             Text("Product Description")
@@ -392,6 +397,107 @@ struct BottomView : View {
         .padding([.horizontal,.top])
     }
 }
+
+struct BottomViewBig : View {
+    
+    @State var index = 1
+    @Binding var selected : Model
+    
+    var body: some View{
+        
+        VStack(alignment: .leading, spacing: 15) {
+            
+            Text("Quantity")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(Color("txt"))
+            
+//            Text("Member Of Your Group")
+//                .font(.caption)
+            
+            HStack(spacing: 15) {
+                Button(action: {
+                    if selected.quantity > 1{selected.quantity -= 1}
+                }) {
+                    
+                    Image(systemName: "minus")
+                        .font(.system(size: 16, weight: .heavy))
+                        .foregroundColor(.black)
+                }
+                
+                Text("\(selected.quantity)")
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .padding(.vertical,5)
+                    .padding(.horizontal,10)
+                    .background(Color.black.opacity(0.06))
+                
+                Button(action: {selected.quantity += 1}) {
+                    
+                    Image(systemName: "plus")
+                        .font(.system(size: 16, weight: .heavy))
+                        .foregroundColor(.black)
+                }
+            }
+            
+//            HStack(spacing: 15){
+//
+//
+//                ForEach(1...6,id: \.self){i in
+//
+//                    Button(action: {index = i}) {
+//
+//                        Text("\(i)")
+//                            .fontWeight(.bold)
+//                            .foregroundColor(index == i ? .white : .gray)
+//                            .padding(.vertical,10)
+//                            .padding(.horizontal)
+//                            .background(Color("Color").opacity(index == i ? 1 : 0.07))
+//                            .cornerRadius(4)
+//                    }
+//                }
+//
+//                Spacer(minLength: 0)
+//            }
+//            .padding(.top)
+            
+            Text("Product Description")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(Color("txt"))
+                .padding(.top,10)
+            
+            Text("Organic Better Boy Tomato")
+                .multilineTextAlignment(.leading)
+            
+            Spacer(minLength: 0)
+            
+            HStack{
+                
+                Spacer(minLength: 0)
+                
+                Button(action: {}) {
+                    
+                    Text("Add to Cart")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.vertical)
+                        .frame(width: UIScreen.main.bounds.width - 100)
+                        .background(Color("Color"))
+                        .clipShape(Capsule())
+                }
+                
+                Spacer(minLength: 0)
+            }
+            .padding(.top)
+            // since all edges are ignored...
+            .padding(.bottom,UIApplication.shared.windows.first?.safeAreaInsets.bottom == 0 ? 15 : UIApplication.shared.windows.first?.safeAreaInsets.bottom)
+            
+        }
+        .padding([.horizontal,.top])
+    }
+}
+
 
 // Tab Buttons...
 
@@ -447,12 +553,12 @@ struct Model : Identifiable {
     var ratings : String
     var price : String
     var img : String
+    var quantity: Int
 }
 
 var data = [
 
-    Model(title: "Tomato", country: "Produce", ratings: "Fruit", price: "$1.00", img: "tomatoe"),
-    Model(title: "Chicken Breast", country: "Meat", ratings: "Poultry", price: "$13.00", img: "chicken"),
+    Model(title: "Tomato", country: "Produce", ratings: "Fruit", price: "$1.00", img: "tomatoe", quantity: 0),
+    Model(title: "Chicken Breast", country: "Meat", ratings: "Poultry", price: "$13.00", img: "chicken", quantity: 0),
    
 ]
-
